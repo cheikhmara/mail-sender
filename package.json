@@ -1,0 +1,15 @@
+{
+  "name": "mail-sender",
+  "version": "1.0.0",
+  "description": "envoi d'alertes par email",
+  "main": "mailSender.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemailer": "^6.9.13"
+  }
+}
