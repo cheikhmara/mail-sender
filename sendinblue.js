@@ -1,26 +1,25 @@
+require('dotenv').config();
 const express = require('express');
 const nodemailer = require('nodemailer');
 const app = express();
 const port = 3000;
 
-// Middleware pour parser le corps des requêtes JSON
 app.use(express.json());
 
-// Configuration du transporteur d'emails
 const transporter = nodemailer.createTransport({
-  service: 'gmail', // Utilisez le service email de votre choix
+  host: 'smtp-relay.brevo.com',
+  port: 587,
   auth: {
-    user: 'pothrek@gmail.com',
-    pass: 'Dokokhamsaysay1$' // Pour des raisons de sécurité, utilisez des variables d'environnement
+    user: process.env.SENDINBLUE_USER,
+    pass: process.env.SENDINBLUE_PASS
   }
 });
 
-// Route pour envoyer un email
 app.post('/send-email', (req, res) => {
   const { to, subject, text } = req.body;
 
   const mailOptions = {
-    from: 'pothrek@gmail.com',
+    from: process.env.SENDINBLUE_USER,
     to: to,
     subject: subject,
     text: text
@@ -34,7 +33,6 @@ app.post('/send-email', (req, res) => {
   });
 });
 
-// Démarrer le serveur
 app.listen(port, () => {
-  console.log(`Server is running on http://192.168.1.15:${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });
